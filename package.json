@@ -1,0 +1,22 @@
+{
+  "name": "worldstat",
+  "version": "0.1.0",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "webpack": "^2.0",
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-2": "^6.5.0"
+  },
+  "scripts": {
+    "start": "webpack"
+  }
+}
