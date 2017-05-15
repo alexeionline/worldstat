@@ -17,19 +17,19 @@ export default class Search extends Component {
 	render() {
 
 		const index = this.props.data.findIndex((item) => { 
-			return item.name.toLowerCase().indexOf(this.state.inputValue.toLowerCase()) != -1; 
+			return item.n.toLowerCase().indexOf(this.state.inputValue.toLowerCase()) != -1; 
 		});
 
 		let table = null;
 
 		if (this.state.inputValue.length && index >= 0) {
-			const {name, square} = this.props.data.get(index);
-			const percents = square/this.props.data.first().square * 100;
+			const {n, v} = this.props.data.get(index);
+			const percents = v/this.props.data.first().v * 100;
 
 			table = <Table 
 				index={index + 1} 
-				title={name} 
-				value={square} 
+				title={n} 
+				value={v} 
 				percents={percents} 
 				list={ getSummaryArray(percents)} 
 			/>
@@ -37,7 +37,7 @@ export default class Search extends Component {
 
 		return (
 			<div>
-				<input placeholder="find..." onChange={this.inputChangeHandler} />
+				<input type="text" placeholder="country" onChange={this.inputChangeHandler} />
 				<div>
 					{ table }
 				</div>

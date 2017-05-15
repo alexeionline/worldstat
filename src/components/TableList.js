@@ -4,17 +4,30 @@ import getSummaryArray from '../helper/table';
 
 export default class TableList extends Component {
 	render() {
+		const unit = this.props.unit;
 		const first = this.props.data.first();
-		const tables = this.props.data.toJS().map(({name, square}, i) => (
-			<Table 
-				index={i+1} 
-				key={name}
-				title={name} 
-				value={square} 
-				percents={square/first.square * 100} 
-				list={ getSummaryArray(square/first.square * 100)} 
-			/>
-		));
+		const tables = this.props.data.toJS().map(({n, v}, i) => {
+
+			let index = '';
+
+			if (this.props.worldTotal && i > 0) {
+				index = i;
+			} else if (!this.props.worldTotal) {
+				index = i+1;
+			}
+			
+			return (
+				<Table 
+					index={index} 
+					unit={unit}
+					key={n}
+					title={n} 
+					value={v} 
+					percents={v/first.v * 100} 
+					list={ getSummaryArray(v/first.v * 100)} 
+				/>
+			)
+		});
 
 		return <div>{ tables }</div>;
 

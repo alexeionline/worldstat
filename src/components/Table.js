@@ -6,7 +6,8 @@ const SIZE = 20;
 
 export default class Table extends Component {
 	render() {
-		const { value, list, title, index, percents} = this.props;
+		const { value, list, title, index, percents, unit} = this.props;
+ 		let units = null;
 
 		const cells = list.map((value, i) => {
 			
@@ -18,13 +19,17 @@ export default class Table extends Component {
 
 			return <Cell key={i} value={value} left={left} top={top} />
 		});
+
+		if (unit === 'sqkm') {
+			units = <span>km<sup>2</sup></span>;
+		}
 		
 		return (
 			<div className={'table'} >
 				<div className={'cellContainer'}>{ cells }</div>
-				<div className={'cellTitle'} title={title}><span className={'tableIndex'}>{index}</span>. {title}</div>
+				<div className={'cellTitle'} title={title}><span className={'tableIndex'}>{index}{ index && '.'}</span> {title}</div>
 				<div className={'cellValue'}>
-					<p className={'text2'}>{value} km<sup>2</sup> </p>
+					<p className={'text2'}>{value} {units}</p>
 					<p className={'text1'}>{percents.toFixed(2)}%</p>
 				</div>
 			</div>
