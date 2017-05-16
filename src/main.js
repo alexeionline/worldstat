@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-
-import SquareDATA from './data/square';
-import PopulationDATA from './data/population';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 import App from './components/App';
 
-const DATA = {
-	square: SquareDATA,
-	population: PopulationDATA,
-};
-
-render(<App defaultSource={'population'} sources={DATA} />, document.getElementById('root'));
-
+render(
+	<Router>
+		<div>
+			<Route exact={true} path="/" render={() => <Redirect to="/population"/>} />
+			<Route path="/:path" component={App} />
+		</div>
+	</Router>
+	, document.getElementById('root')
+);

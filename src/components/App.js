@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
 import { List } from 'immutable';
+import { Link } from 'react-router-dom';
+
 import TableList from './TableList';
 import Table from './Table';
 import Search from './Search';
 import SourcesList from './SourcesList';
 
+import SquareDATA from '../data/square';
+import PopulationDATA from '../data/population';
+
+const DATA = {
+	square: SquareDATA,
+	population: PopulationDATA,
+};
+
 export default class App extends Component {
 
 	state = {
-		source: this.props.defaultSource,
-		worldTotal: true,
-	}
-
-	updateSource = (value) => {
-		this.setState(() => {
-			return {
-				source: value
-			}
-		});
+		worldTotal: true
 	}
 
 	updateFilter = (value) => {
@@ -29,29 +30,33 @@ export default class App extends Component {
 	}
 
 	render() {
+		const sources = DATA;
 		const filterFunc = this.state.worldTotal ? () => true : ({m}, i) => m !== true;
-		const unit = this.props.sources[this.state.source].unit;
-		const list = List(this.props.sources[this.state.source].items).filter(filterFunc);
-
+		const value = this.props.match.params.path;
+		const unit = sources[value].unit;
+		const list = List(sources[value].items).filter(filterFunc);
+	 	
 		return (
 			<div className="container">
 				<div className="nav">
 					<div className='title'>
 						<h1>WorldStat</h1>
 						<p>of</p>
-						<h3>{ this.state.source }</h3>
 					</div>
+					
+					<Link to={'square'} >Square</Link>
+					<Link to={'population'} >Population</Link>
+
 					<SourcesList 
 						worldTotal={this.state.worldTotal}
-						onChangeSource={this.updateSource} 
-						onChangeFilter={this.updateFilter} 
+						onChangeFilter={this.updateFilter}
 					/>
 					<Search data={list} />
 				</div>
 
 				<div className="main">
 					<TableList
-						worldTotal={this.state.worldTotal}
+						worldTotal={true}
 						data={list} 
 						unit={unit} 
 					/>
@@ -59,4 +64,4 @@ export default class App extends Component {
 			</div>
 		);
 	}
-};
+}
