@@ -5,15 +5,7 @@ import { Link } from 'react-router-dom';
 import TableList from './TableList';
 import Table from './Table';
 import Search from './Search';
-import SourcesList from './SourcesList';
-
-import SquareDATA from '../data/square';
-import PopulationDATA from '../data/population';
-
-const DATA = {
-	square: SquareDATA,
-	population: PopulationDATA,
-};
+import WorldDataFilter from './WorldDataFilter';
 
 export default class App extends Component {
 
@@ -30,24 +22,25 @@ export default class App extends Component {
 	}
 
 	render() {
-		const sources = DATA;
 		const filterFunc = this.state.worldTotal ? () => true : ({m}, i) => m !== true;
 		const value = this.props.match.params.path;
-		const unit = sources[value].unit;
-		const list = List(sources[value].items).filter(filterFunc);
+		const unit = this.props.sources[value].unit;
+		const list = List(this.props.sources[value].items).filter(filterFunc);
 	 	
 		return (
 			<div className="container">
 				<div className="nav">
 					<div className='title'>
-						<h1>WorldStat</h1>
-						<p>of</p>
+						<h1>WorldStats</h1>
+					</div>
+
+					<div className="sourceList">
+						<Link className={value === 'area' ? 'active' : ''} to={'area'} >Area</Link>
+						<Link className={value === 'population' ? 'active' : ''} to={'population'} >Population</Link>
+						<Link className={value === 'cities' ? 'active' : ''} to={'cities'} >Cities</Link>
 					</div>
 					
-					<Link to={'square'} >Square</Link>
-					<Link to={'population'} >Population</Link>
-
-					<SourcesList 
+					<WorldDataFilter 
 						worldTotal={this.state.worldTotal}
 						onChangeFilter={this.updateFilter}
 					/>
@@ -56,7 +49,7 @@ export default class App extends Component {
 
 				<div className="main">
 					<TableList
-						worldTotal={true}
+						worldTotal={this.state.worldTotal}
 						data={list} 
 						unit={unit} 
 					/>

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "dependencies": {
     "classnames": "^2.2.5",
-    "expressjs": "^1.0.1",
+    "express": "^4.15.2",
     "immutable": "^3.8.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
@@ -11,14 +11,10 @@
     "react-router-dom": "^4.0.0-beta.8"
   },
   "devDependencies": {
-    "babel-core": "^6.2.1",
     "babel-eslint": "^7.2.3",
-    "babel-loader": "^6.2.0",
     "babel-preset-latest": "^6.16.0",
-    "babel-preset-react": "^6.23.0",
     "babel-preset-stage-2": "^6.5.0",
-    "webpack": "^2.0",
-    "webpack-dev-server": "^2.4.5"
+    "webpack": "^2.5.1"
   },
   "scripts": {
     "start": "node server.js",

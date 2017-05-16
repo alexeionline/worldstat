@@ -2,7 +2,7 @@ module.exports = {
 	context: `${__dirname}/src`,
 
 	entry: {
-		index: './main',
+		index: './client',
 	},
 
 	output: {

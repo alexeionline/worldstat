@@ -37,7 +37,7 @@ export default class Search extends Component {
 
 		return (
 			<div>
-				<input type="text" placeholder="country" onChange={this.inputChangeHandler} />
+				<input type="text" placeholder="filter" onChange={this.inputChangeHandler} />
 				<div>
 					{ table }
 				</div>

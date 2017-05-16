@@ -4,6 +4,10 @@ import Cell from './Cell';
 const SIDE = 5;
 const SIZE = 20;
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export default class Table extends Component {
 	render() {
 		const { value, list, title, index, percents, unit} = this.props;
@@ -29,7 +33,7 @@ export default class Table extends Component {
 				<div className={'cellContainer'}>{ cells }</div>
 				<div className={'cellTitle'} title={title}><span className={'tableIndex'}>{index}{ index && '.'}</span> {title}</div>
 				<div className={'cellValue'}>
-					<p className={'text2'}>{value} {units}</p>
+					<p className={'text2'}>{numberWithCommas(value)} {units}</p>
 					<p className={'text1'}>{percents.toFixed(2)}%</p>
 				</div>
 			</div>
